@@ -26,7 +26,9 @@ SECRET_KEY = "django-insecure-3m6%oig4dun!0lha7x$(+@&tua4&&arzg=o@6#na!3fn@5a-_)
 DEBUG = True
 
 ALLOWED_HOSTS = ["[2a01:4f9:4a:27c1::218]", "wybieramycms.bieda.it"]
-
+CSRF_TRUSTED_ORIGINS = [f"http://{host}" for host in ALLOWED_HOSTS] + [
+    f"https://{host}" for host in ALLOWED_HOSTS
+]
 
 # Application definition
 
