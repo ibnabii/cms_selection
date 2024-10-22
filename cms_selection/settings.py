@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-3m6%oig4dun!0lha7x$(+@&tua4&&arzg=o@6#na!3fn@5a-_)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["[2a01:4f9:4a:27c1::218]", "wybieramycms.bieda.it"]
+ALLOWED_HOSTS = ["[2a01:4f9:4a:27c1::218]", "wybieramycms.bieda.it", "127.0.0.1"]
 CSRF_TRUSTED_ORIGINS = [f"http://{host}" for host in ALLOWED_HOSTS] + [
     f"https://{host}" for host in ALLOWED_HOSTS
 ]
@@ -45,8 +45,12 @@ INSTALLED_APPS = [
     "menus",  # required by django-cms
     "treebeard",  # required by django-cms
     "sekizai",  # required by django-cms
-    "djangocms_versioning",  # required by django-cms (recommended)
+    # "djangocms_versioning",  # required by django-cms (recommended)
     "djangocms_alias",  # required by django-cms (recommended)
+    "djangocms_text_ckeditor",  # django-cms plugin
+    "djangocms_picture",  # django-cms plugin
+    "filer",  # required by djangocms_picture
+    "easy_thumbnails",  # required by filer
     "wagtail.contrib.forms",  # required by wagtail
     "wagtail.contrib.redirects",  # required by wagtail
     "wagtail.embeds",  # required by wagtail
@@ -171,6 +175,8 @@ CMS_TEMPLATES = [
     ("django_cms_home.html", "Home page template"),
 ]
 
+# djangocms-text-ckeditor
+TEXT_INLINE_EDITING = True
 
 # wagtail
 WAGTAIL_SITE_NAME = "Przykładowa strona"
