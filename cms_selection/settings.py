@@ -45,6 +45,20 @@ INSTALLED_APPS = [
     "sekizai",  # required by django-cms
     "djangocms_versioning",  # required by django-cms (recommended)
     "djangocms_alias",  # required by django-cms (recommended)
+    "wagtail.contrib.forms",  # required by wagtail
+    "wagtail.contrib.redirects",  # required by wagtail
+    "wagtail.embeds",  # required by wagtail
+    "wagtail.sites",  # required by wagtail
+    "wagtail.users",  # required by wagtail
+    "wagtail.snippets",  # required by wagtail
+    "wagtail.documents",  # required by wagtail
+    "wagtail.images",  # required by wagtail
+    "wagtail.search",  # required by wagtail
+    "wagtail.admin",  # required by wagtail
+    "wagtail",  # required by wagtail
+    "modelcluster",  # required by wagtail
+    "taggit",  # required by wagtail
+    "wagtail_home",  # sample wagtail app
 ]
 
 SITE_ID = 1  # required by django-cms
@@ -63,6 +77,7 @@ MIDDLEWARE = [
     "cms.middleware.page.CurrentPageMiddleware",  # required by django-cms
     "cms.middleware.toolbar.ToolbarMiddleware",  # required by django-cms
     "cms.middleware.language.LanguageCookieMiddleware",  # required by django-cms
+    "wagtail.contrib.redirects.middleware.RedirectMiddleware",  # required by wagtail
 ]
 
 ROOT_URLCONF = "cms_selection.urls"
@@ -153,3 +168,17 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 CMS_TEMPLATES = [
     ("django_cms_home.html", "Home page template"),
 ]
+
+
+# wagtail
+WAGTAIL_SITE_NAME = "Przykładowa strona"
+WAGTAILADMIN_BASE_URL = "http://127.0.0.1:8000/wagtail/cms"
+# If this setting is not present, Wagtail will fall back to request.site.root_url or to the hostname of the request.
+# Although this setting is not strictly required, it is highly recommended because leaving it out may produce
+# unusable URLs in notification emails.
+# WAGTAILADMIN_BASE_URL = "http://zobaczymy"
+
+# Add a WAGTAILDOCS_EXTENSIONS setting to specify the file types that Wagtail will allow to be uploaded as documents.
+# This can be omitted to allow all file types, but this may present a security risk if untrusted users are allowed
+# to upload documents - see User Uploaded Files.
+# WAGTAILDOCS_EXTENSIONS = ['csv', 'docx', 'key', 'odt', 'pdf', 'pptx', 'rtf', 'txt', 'xlsx', 'zip']
