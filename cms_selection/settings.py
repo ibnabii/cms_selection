@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-3m6%oig4dun!0lha7x$(+@&tua4&&arzg=o@6#na!3fn@5a-_)
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["[2a01:4f9:4a:27c1::218]", "wybieramycms.bieda.it"]
 
 
 # Application definition
