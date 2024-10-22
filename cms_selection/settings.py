@@ -31,13 +31,23 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "djangocms_admin_style",  # required by django-cms, it has to be before django.contrib.admin
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",  # required by django-cms
+    "cms",  # required by django-cms
+    "menus",  # required by django-cms
+    "treebeard",  # required by django-cms
+    "sekizai",  # required by django-cms
+    "djangocms_versioning",  # required by django-cms (recommended)
+    "djangocms_alias",  # required by django-cms (recommended)
 ]
+
+SITE_ID = 1  # required by django-cms
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -47,6 +57,12 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.locale.LocaleMiddleware",  # required by django-cms
+    "cms.middleware.utils.ApphookReloadMiddleware",  # required by django-cms (actually recommended)
+    "cms.middleware.user.CurrentUserMiddleware",  # required by django-cms
+    "cms.middleware.page.CurrentPageMiddleware",  # required by django-cms
+    "cms.middleware.toolbar.ToolbarMiddleware",  # required by django-cms
+    "cms.middleware.language.LanguageCookieMiddleware",  # required by django-cms
 ]
 
 ROOT_URLCONF = "cms_selection.urls"
@@ -54,7 +70,7 @@ ROOT_URLCONF = "cms_selection.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -62,6 +78,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.i18n",  # required by django-cms
+                "sekizai.context_processors.sekizai",  # required by django-cms
+                "cms.context_processors.cms_settings",  # required by django-cms (by cms check)
             ],
         },
     },
@@ -104,12 +123,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = "pl"
-
+LANGUAGES = [
+    ("pl", "Polski"),
+    # ("en", "English"),
+]
 TIME_ZONE = "Europe/Warsaw"
 
-USE_I18N = False
+USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
@@ -124,3 +146,10 @@ STATIC_ROOT = BASE_DIR / "static_files"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# django-cms
+CMS_CONFIRM_VERSION4 = True
+X_FRAME_OPTIONS = "SAMEORIGIN"
+CMS_TEMPLATES = [
+    ("django_cms_home.html", "Home page template"),
+]
